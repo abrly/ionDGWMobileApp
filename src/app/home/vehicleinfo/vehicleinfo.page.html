@@ -1,0 +1,196 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{heading}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="main_background">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+          <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+              <ion-img style="width: 80px; display: block; margin: auto;" class="icon_ani" src="../assets/icon/cars.png"></ion-img>
+          </ion-col>
+      </ion-row>
+    <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+            <ion-card class="card_carsearch">
+               <ion-card-header>
+                    <ion-card-title class="card-title">
+                        {{subheading}}
+                    </ion-card-title>
+                </ion-card-header> 
+                <ion-card-content class="fix_card_content_extn">
+                    <ion-grid class="ion-text-center">
+                        <ion-row>
+                            <ion-col size="5" class="ion-text-center">   
+                                <ion-select class="input_txt" interface="alert" name="platecode" formControlName ="platecode" [placeholder]="plateCodePH" [cancelText]="Dismiss" [okText]="Ok" >
+                                    <ion-select-option value="{{item.Platecodestring}}" *ngFor="let item of platecodes"> {{item.Platecodestring}}</ion-select-option> 
+                                  </ion-select>  
+                            </ion-col>
+                            <ion-col size="7" class="ion-text-center">
+                                 <ion-input class="input_txt" type="text" [placeholder]="platenoPH" formControlName="plateno" ></ion-input>  
+                            </ion-col>                           
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size="12" size-sm="8" class="ion-text-center">
+                                <ion-button
+                                style="height: 35px;"
+                                type="submit"
+                                color="danger"   
+                                [disabled]="!form.valid"               
+                                (click)="onSearchVehicle()">                            
+                                {{Search}}
+                              </ion-button>
+                            </ion-col>
+                        </ion-row>                                      
+                    </ion-grid>    
+                </ion-card-content>                   
+            </ion-card>
+        </ion-col>
+     </ion-row>  
+     <div *ngIf="resultFound==='false'" class="ion-text-center">
+       {{noresultsfound}}
+    </div>        
+    <ion-row *ngIf="resultFound==='true' && this.vehicleInformation.WorkOrderDocUrl?.length > 0"> 
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+          <ion-card class="card_" style="margin: 0px 16px;">
+            <br>  
+            <div>           
+            <strong> {{Attachments}}  </strong></div>
+            <div> 
+                <div class="downl_n"  (click)="openMe(this.vehicleInformation.WorkOrderDocUrl)">
+                  <span style="font-size: 1.2em; display: inline-block; margin-top: -1px;">
+                    <span>
+                      <ion-img style="height: 20px; vertical-align: top ; margin: auto;" class="icon_ani" src="../assets/icon/down_PDF.png">&nbsp; </ion-img>
+                    </span>
+                  </span>  {{WorkOrderDocUrlCap}} </div>
+                </div> 
+                <br>
+          </ion-card>
+      </ion-col>
+    </ion-row>
+      <ion-row *ngIf="resultFound==='true'">  
+          <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+              <ion-card class="card_">
+                  <ion-card-header>
+                      <ion-card-title class="card-title_small">
+                       <strong> {{ this.vehicleInformation.Name }} </strong>
+                      </ion-card-title>
+                  </ion-card-header> 
+                  <ion-card-content class="fix_card_content">
+                      <br>
+                      <span style="background-color: #fff;font-size: 18px; font-weight: bold; border: #757575 3px solid; padding: 1px 20px; border-radius: 7px; margin: 5px;letter-spacing: 3px !important; ">
+                        {{this.vehicleInformation.PlateNo}}
+                        
+                    </span>
+                      <br>
+                      <br>
+                      <ion-grid class="ion-text-center">
+                        <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong> {{Year}}</strong>                              
+                            </ion-col>    
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.Year}}                      
+                            </ion-col>                    
+                          </ion-row>  
+                          <br>
+                        <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong> {{Color}}</strong>                              
+                            </ion-col>    
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.Color}}                            
+                            </ion-col>                    
+                          </ion-row>                          
+                          <br>
+                         
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{LicenseDate}}</strong>                              
+                            </ion-col>   
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.RegistrationDate}}                       
+                            </ion-col>                          
+                          </ion-row> 
+                          <br>
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{LicenseExpiry}}</strong>                              
+                            </ion-col>   
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.RegistrationExpiryDate}}                   
+                            </ion-col>                          
+                          </ion-row> 
+                        <br>
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{ChassisNo}}</strong>                              
+                            </ion-col>    
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                 {{this.vehicleInformation.ChassisNo}}                             
+                            </ion-col>                   
+                          </ion-row> 
+                          <br>
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{EngineNo}}</strong>                              
+                            </ion-col>       
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.EngineNo}}                           
+                            </ion-col>                    
+                          </ion-row> 
+                          <br>
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{LastMeterReading}}</strong>                              
+                            </ion-col>     
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.LastMeterReading}}                          
+                            </ion-col>                            
+                          </ion-row> 
+                          <br>
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{InsuranceRefNo}}</strong>                              
+                            </ion-col>  
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.InsuranceNo}}                        
+                            </ion-col>                          
+                          </ion-row> 
+                          <br>
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{OperatorName}}</strong>                              
+                            </ion-col> 
+                            <ion-col size="6" class="padding_o" style="display: flex; column-gap: 5px;">
+                              {{this.vehicleInformation.OperatorName}}
+                          </ion-col>                             
+                          </ion-row> 
+                          <br>
+                          <ion-row class="ion-text-center">                            
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                <strong>{{ServiceCost}}</strong>                              
+                            </ion-col>    
+                            <ion-col size="6" class="padding_o ion-text-center" style="display: flex; column-gap: 5px;">
+                                {{this.vehicleInformation.ServiceCost}}                         
+                            </ion-col>                          
+                          </ion-row>                                              
+                      </ion-grid>    
+                  </ion-card-content>                   
+              </ion-card>
+          </ion-col>
+      </ion-row>    
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>

@@ -1,0 +1,44 @@
+<!--<ion-item class="list_item_" detail>
+  <ion-avatar slot="start" style="--border-radius: 0%;">
+      <img src="../assets/icon/job_items.png" style="transform: scale(1.3);">
+  </ion-avatar>
+  <ion-label>
+      <h6><b>{{ equipmentDesc }}</b></h6>
+      <p class="card_reg_no">
+          <ion-text>{{ EQLicense }}</ion-text>
+      </p>
+      <p>
+          <ion-text>{{ workOrderID }}</ion-text>
+      </p>
+      <ion-badge [color]="onChangeStatusColor(WorkOrderStatusID)">{{ WorkOrderStatus }}</ion-badge>
+
+      <div style="clear: both;"></div>
+      <p style=" color: #55a2b8;">
+          <ion-text *ngIf="lang=='en'">{{ RepairReason }}</ion-text>
+          <ion-text *ngIf="lang=='ar'">{{ RepairReasonAr }}</ion-text>
+      </p>
+  </ion-label>
+</ion-item> -->
+<ion-item class="list_item_" detail>
+    <ion-avatar slot="start" style="--border-radius: 0%;">
+        <img src="../assets/icon/job_items.png" style="transform: scale(1.3);">
+    </ion-avatar>
+    <ion-label>
+        <h6><b>{{ equipmentDesc }} - {{ equipmentYear }}  </b></h6>
+        <p class="card_reg_no">
+            <ion-text>{{ EQLicense }}</ion-text>
+        </p>        
+        <div style="clear: both;"></div>
+        <p style="display: inline-block;">
+            <ion-text>{{ workOrderID }}</ion-text>
+        </p>
+        <ion-badge class="job_status" [color]="onChangeStatusColor(WorkOrderStatusID)">{{ WorkOrderStatus }}</ion-badge>
+ 
+        <div style="clear: both;"></div>
+        <p>
+            <span style="font-weight: bold;">{{jobTypeText}}</span>
+            <ion-text *ngIf="lang=='en'">{{ RepairReason }}</ion-text>
+            <ion-text *ngIf="lang=='ar'">{{ RepairReasonAr }}</ion-text>
+        </p>
+    </ion-label>
+</ion-item>

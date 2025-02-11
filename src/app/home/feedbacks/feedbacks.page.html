@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"  ></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{heading1}} </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding main_background">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+          <ion-img style="width: 80px; display: block; margin: auto;" src="../assets/icon/feedback_.png" class="icon_ani"></ion-img>
+        </ion-col>  
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <div class="margin_top15">
+              <ion-label>{{ServiceTypes}}</ion-label>
+              <ion-select class="input_txt ion-padding" interface="action-sheet" name="serviceTypeID" formControlName ="serviceTypeID" [placeholder]="ServiceTypesPlaceholder" [cancelText]="Dismiss" >
+                <ion-select-option value="{{item.ServiceID}}" *ngFor="let item of serviceTypes"> <div *ngIf="lang==='en'">{{item.ServiceDescription}}</div><div *ngIf="lang==='ar'">{{item.ServiceDescriptionAr}}</div> </ion-select-option> 
+            </ion-select>
+            </div>
+            <div class="margin_top15">
+              <ion-label>{{FeedbackTypes}}</ion-label>
+              <ion-select class="input_txt ion-padding" interface="action-sheet" name="serviceTypeID" formControlName ="feedbackTypeID" [placeholder]="FeedbackTypesPlaceholder" [cancelText]="Dismiss" >
+                <ion-select-option value="{{item.FeedbackTypeID }}" *ngFor="let item of feedbackTypes"> <div *ngIf="lang==='en'">{{item.FeedbackTypeDescription}}</div><div *ngIf="lang==='ar'">{{item.FeedbackTypeDescriptionAr}}</div></ion-select-option> 
+            </ion-select>
+            </div>
+            <div class="margin_top15">
+              <ion-label position="floating">{{Message}}</ion-label>
+              <ion-textarea  class="input_txt ion-padding" [placeholder]="MessagePlaceHolder" formControlName="feedbackMessage" rows="5" cols="20"></ion-textarea>
+            </div>
+            <br>
+            <div class="margin_top15 ion-text-center">
+
+              <ion-button size="small" (click)="getAttachmentOptions()">
+                <ion-icon name="document-outline" slot="start"></ion-icon>
+                <ion-label>{{AddUpdateAttachment}}</ion-label>
+              </ion-button>
+
+            </div>           
+            <br>
+            <div class="margin_top15 ion-text-center" >
+              <ion-card *ngIf="photo">
+                <ion-card-content>
+                  <img [src]="photo">
+                </ion-card-content>
+              </ion-card>
+            </div>           
+            <br>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">          
+          <ion-button
+            type="submit"
+            color="danger"
+            expand="block"
+            [disabled]="!form.valid"
+            (click)="onCreateFeedback()">
+            {{SubmitFeedback}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>
+
+
+

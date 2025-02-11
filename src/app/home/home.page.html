@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>         
+      </ion-buttons>
+      <div ion-text-center>
+        <img class="btn_m_img" src="../assets/icon/dgw_logo.png" style="height:38px; padding-right: 0px;">
+      </div>      
+      <ion-buttons slot="end">
+                <ion-button (click)="presentPopover($event)">
+            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+          </ion-button>  
+    </ion-buttons> 
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="3" class="ion-text-start">
+
+            <div *ngIf="greetingTextType=='1'">
+                <ion-text class="ion-text-start" style="font-style: italic;font-size:medium;color:black; font-weight: bold;">{{ goodMoring }} , </ion-text><ion-text>{{ (userName.length>12)? (userName | slice:0:12)+'..':(userName) }} </ion-text>
+            </div>
+
+            <div *ngIf="greetingTextType=='2'">
+                <ion-text class="ion-text-start" style="font-style: italic;font-size:medium;color:black; font-weight: bold;">{{ goodAfternoon }} , </ion-text><ion-text>{{ (userName.length>12)? (userName | slice:0:12)+'..':(userName) }} </ion-text>
+            </div>
+
+            <div *ngIf="greetingTextType=='3'">
+                <ion-text class="ion-text-start" style="font-style: italic;font-size:medium;color:black; font-weight: bold;">{{ goodEvening }} , </ion-text><ion-text>{{ (userName.length>12)? (userName | slice:0:12)+'..':(userName) }} </ion-text>
+            </div>
+            
+        </ion-col>
+    </ion-row>
+      <ion-row>
+          <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+            <ion-grid class="ion-text-center">
+
+                  <ion-row>
+                      <ion-col>
+                          <div class="notice_box" ion-padding>
+                              <div class="hding ion-text-center">{{Notification}}</div>
+                              <div *ngIf="lang==='ar'"> {{MessageAr}} </div><div *ngIf="lang==='en'"> {{MessageEn}} </div>  
+                          </div>
+                      </ion-col>
+                  </ion-row>               
+                  <ion-row>
+                      <ion-col>
+                          <div class="btn_m" (click)="onClickActiveStatus()">
+                              <span>                               
+                                 <img class="btn_m_img" src="../assets/icon/actv_jobcard.png"> </span> {{ service1FirstName }}  <br/> {{ service1LastName }} 
+                          </div>
+                      </ion-col>
+
+                      <ion-col>
+                          <div class="btn_m" (click)="onClickAllStatus()" style="box-shadow:#80a0b4;">                           
+                            <span style="padding: 10px;"  >
+                                <img class="btn_m_img" src="../assets/icon/all_jobcard.png"> 
+                            </span> {{ service2FirstName }}  <br/> {{ service2LastName }}
+                          </div>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                        <div class="btn_m" (click)="onClickSearchCars()">
+                            <span>
+                              <img class="btn_m_img" src="../../../assets/icon/cars.png"/>     
+                            </span>  {{ service3FirstName }} <br/>  {{ service3LastName }}
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="btn_m" (click)="onClickAppointments()" style="box-shadow:#80a0b4;">
+                            <span style="padding: 10px;"  >                             
+                              <img class="btn_m_img" src="../assets/icon/appointment.png"> 
+                            </span> 
+                            {{ service4FirstName }} <br/> {{ service4LastName }}
+                        </div>
+                    </ion-col>
+                </ion-row> 
+                <ion-row>
+                    <ion-col>
+                        <div class="btn_m" (click)="onClickFeedback()" style="box-shadow:#80a0b4;">                            
+                            <span style="padding: 10px;"  > <img class="btn_m_img" src="../assets/icon/feedback_.png"> </span> {{ service5FirstName }}  <br/> {{ service5LastName }} 
+                        </div>
+                    </ion-col>
+                </ion-row> 
+                  <ion-row>
+                      <ion-col>
+                          <img style="margin-top: 10px; padding: 10px;" src="../assets/icon/dgw_bld.png">
+                      </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                        <div class="btn_m toll_free">
+                            <a href="tel:8003497"><span>{{ tollfreeNumber }}</span></a>    {{ contactMessage }} 
+                        </div>
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+          </ion-col>
+      </ion-row>
+  </ion-grid>  
+</ion-content>
+<ion-footer class="myjcfooter">
+    <div class = "bar bar-footer bar-assertive"> 
+      <span>
+        <ion-label style="font-size:smaller"> </ion-label> 
+      </span>      
+  </div>
+</ion-footer>

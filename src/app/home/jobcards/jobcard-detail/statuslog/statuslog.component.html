@@ -1,0 +1,33 @@
+<ion-grid>
+  <ion-row>
+      <ion-col size="12" size-sm="" offset-sm="0">
+          <ion-card class="log_card">
+              <ion-card-header class="padding_o " style="text-align: center;">
+                  <ion-card-title class="card_title_no">{{ stslog.SNo }} </ion-card-title>
+              </ion-card-header>
+
+              <ion-grid class="grid_">
+                  <ion-row>
+                      <ion-col class="ion-col" size="5">
+                          {{statusDateTimeString}}
+                      </ion-col>
+                      <ion-col class="ion-col">
+                          <ion-text color="danger">{{ stslog.StatusDateTime| date: 'dd/MM/yyyy' }} </ion-text> -
+                          <ion-text color="tertiary"> {{ stslog.StatusDateTime | date: 'h:mm:ss a' }}</ion-text>
+                      </ion-col>
+                  </ion-row>
+                  <ion-row class="ion-col">
+                    <ion-col size="5">
+                        {{statusDesc}}
+                    </ion-col>
+                      <ion-col class="ion-col">
+                          {{ stslog.StatusDesc }} 
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+              <div>
+              </div>
+          </ion-card>
+      </ion-col>
+  </ion-row>
+</ion-grid>

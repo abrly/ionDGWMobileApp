@@ -1,0 +1,116 @@
+<ion-toolbar color="danger">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/home/appointments"></ion-back-button>
+  </ion-buttons>
+   <ion-title> {{heading}} </ion-title>
+  </ion-toolbar> 
+<ion-content class="ion-padding main_background">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+          <ion-img style="width: 80px; display: block; margin: auto;" src="../assets/icon/appointment.png" class="icon_ani"></ion-img>
+        </ion-col>  
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+
+          <ion-card class="log_card" *ngIf="showAppointmentSubmissionCard">
+             <ion-grid class="grid_">
+               <ion-row>
+                 <ion-col class="ion-col" size="5">
+                  {{cpVehicleReg}}
+                 </ion-col>
+                 <ion-col class="ion-col">
+                     <ion-text color="danger"> {{ pPlatecode }} - {{ pPlateno }} </ion-text>                      
+                 </ion-col>
+                </ion-row>
+                 <ion-row>
+                     <ion-col class="ion-col" size="5">
+                      {{cpVehicleDetails}}
+                     </ion-col>
+                     <ion-col class="ion-col">
+                         <ion-text color="danger">{{ equipmentDesc }} </ion-text>                      
+                     </ion-col>
+                 </ion-row>
+                 <ion-row>
+                 <ion-col class="ion-col" size="5">
+                  {{cpEquipmentID}}
+                 </ion-col>
+                 <ion-col class="ion-col">
+                     <ion-text color="danger">{{ equipmentID }} </ion-text>                      
+                 </ion-col>
+                 </ion-row>
+                 <ion-row class="ion-col">
+                   <ion-col size="5">
+                    {{cpAppointmentDate}}
+                   </ion-col>
+                   <ion-col class="ion-col">
+                    <ion-text color="danger"> {{ this.pAppointmentDate | date: 'dd/MM/yyyy' }} </ion-text>
+                   </ion-col>
+               </ion-row>
+                 <ion-row>
+                   <ion-col class="ion-col" size="5">
+                    {{cpTimeslot}}
+                   </ion-col>
+                   <ion-col class="ion-col">
+                    <ion-text color="danger"> {{ this.pTimeSlot }} </ion-text>
+                   </ion-col>
+               </ion-row>
+               <ion-row>
+                <ion-col class="ion-col" size="5">
+                 {{cpMeterReading}}
+                </ion-col>
+                <ion-col class="ion-col">
+                 <ion-input  class="input_txt ion-padding" formControlName="MeterReading"></ion-input>
+                </ion-col>
+            </ion-row>
+
+               <ion-row>
+                 <ion-col class="ion-col" size="5">
+                   {{cpMessageDescription}}
+                 </ion-col> 
+                 <ion-col class="ion-col">
+                  
+                  <ion-textarea  class="input_txt ion-padding" [placeholder]="cpMessageDescriptionPH" formControlName="description" rows="2" cols="35"></ion-textarea>
+                   
+                 </ion-col>          
+             </ion-row>
+           <!--  <ion-row>
+               <ion-col class="ion-col" size="12">
+                  
+                <ion-textarea  class="input_txt ion-padding" [placeholder]="cpMessageDescriptionPH" formControlName="description" rows="10" cols="20"></ion-textarea>
+                 
+               </ion-col>
+              
+           </ion-row> -->
+             </ion-grid>
+             <div>
+             </div>
+         </ion-card>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row *ngIf="showAppointmentSubmissionCard">
+        <ion-col size-sm="6" offset-sm="3">          
+          <ion-button
+            type="submit"
+            color="danger"
+            expand="block"
+            [disabled]="!form.valid"
+            (click)="onBookAppointment()">
+            {{cpBookAppointment}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+ 
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>

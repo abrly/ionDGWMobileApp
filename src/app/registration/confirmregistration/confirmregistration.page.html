@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/reg" ></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{heading1}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form autocomplete="off" [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <div class="container_">
+              <ul class="progressbar">
+                  <li class="finish_">{{step1}}</li>
+                  <li class="finish_">{{step2}}</li>
+                  <li class="current">{{step3}}</li>
+              </ul>
+          </div>
+          <br>
+          <div class="margin_top15">
+              <ion-label position="stacked">{{firstName}}</ion-label>
+              <ion-input
+                class="input_txt ion-padding"
+                type="text"
+                name="firstName"
+                formControlName="firstName"
+                [placeholder]="firstNamePlaceholder"
+                ></ion-input>
+            </div>
+            <span *ngIf="!form.get('firstName').valid && form.get('firstName').touched" class="msg_red">
+                {{firstNameRequired}}
+            </span>
+            <div class="margin_top15">
+              <ion-label position="stacked">{{lastName}}</ion-label>
+              <ion-input 
+              class="input_txt ion-padding"
+                type="text"
+                name="lastName"
+                formControlName="lastName"
+                [placeholder]="lastNamePlaceholder"
+                ></ion-input>
+              </div>
+            <span *ngIf="!form.get('lastName').valid && form.get('lastName').touched" class="msg_red">
+              {{lastNameRequired}}
+          </span>
+          <div class="margin_top15">
+              <ion-label position="stacked">{{userID}}</ion-label>
+              <ion-input 
+              class="input_txt ion-padding"
+                type="text"
+                name="userID"
+                formControlName="userID"
+                autocomplete="off"
+                [placeholder]="userIDPlaceholder"
+                ></ion-input>
+              </div>
+            <span *ngIf="!form.get('userID').valid && form.get('userID').touched && isSubmitted" class="msg_red">
+              {{userIDRequired}}
+            </span>        
+         <span *ngIf="form.get('userID').errors?.minlength" class="help-block">
+           {{useridMinLenMsg}}
+       </span>
+       <span *ngIf="form.get('userID').errors?.maxlength" class="help-block">
+        {{useridMaxLenMsg}}
+     </span>
+            <span *ngIf="form.controls['userID']?.errors?.userIDTaken" class="help-block">
+             {{userIDTaken}}
+          </span>
+          <div class="margin_top15">
+              <ion-label position="stacked">{{password}}</ion-label>
+              <ion-input 
+              class="input_txt ion-padding"
+                type="password"
+                name="password"
+                formControlName="password"
+                required
+                maxlength="8"
+                autocomplete="new-password"
+                [placeholder]="passwordPlaceholder"
+                ></ion-input>
+              </div>
+            <span *ngIf="!form.get('userID').valid && form.get('userID').touched" class="msg_red">
+              {{passwordRequired}}
+            </span>
+            <div class="margin_top15">
+              <ion-label position="stacked">{{confirmpassword}}</ion-label>
+              <ion-input              
+              class="input_txt ion-padding"
+                type="password"
+                name="confirmPassword"
+                formControlName="confirmPassword"
+                required
+                minlength="6"
+                maxlength="8"
+                [placeholder]="confirmpasswordPlaceholder"
+                ></ion-input>
+              </div>
+            <span *ngIf="form.controls['confirmPassword']?.errors?.mismatched" class="msg_red">
+               {{confirmpasswordMessage}}
+            </span>
+            <div class="margin_top15">
+              <ion-label position="stacked">{{email}}</ion-label>
+              <ion-input 
+              class="input_txt ion-padding"
+                type="email"
+                name="email"
+                formControlName="email"
+                required
+                email
+                maxlength="200"
+                [placeholder]="emailPlaceholder"                
+               ></ion-input>
+            </div>
+            <span *ngIf="!form.get('email').valid && form.get('email').touched" class="msg_red">
+              {{emailMessage}}
+            </span>
+            <div class="margin_top15">
+              <ion-label position="stacked">{{preferredLanguage}}</ion-label>
+              <ion-select  class="input_txt ion-padding" interface="action-sheet" name="preferredLanguageID" formControlName ="preferredLanguageID" [cancelText]="cancelText" >
+                  <ion-select-option value="{{item.LanguageID}}" *ngFor="let item of loadedLangs">
+                    <div *ngIf="lang==='ar'">{{item.LanguageNameAr}}</div>
+                    <div *ngIf="lang==='en'">{{item.LanguageName}}</div>
+                  </ion-select-option> 
+              </ion-select>
+            </div>
+
+           </ion-list>
+        </ion-col>
+      </ion-row>
+      <br>
+      <span *ngIf="!form.valid && form.touched" class="msg_red">
+        {{message}}
+      </span>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          
+          <ion-button
+            type="submit"
+            color="danger"
+            expand="block"
+            [disabled]="!form.valid"
+            (click)="onCompleteRegistration()"
+          >
+           {{complete}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <!-- <div class="ion-text-center">
+    <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner>
+  </div> -->
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>

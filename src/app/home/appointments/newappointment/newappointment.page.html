@@ -1,0 +1,126 @@
+<ion-toolbar color="danger">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/home/appointments"></ion-back-button>
+  </ion-buttons>
+   <ion-title> {{heading}}</ion-title>
+  </ion-toolbar> 
+<ion-content class="ion-padding main_background">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+          <ion-img style="width: 80px; display: block; margin: auto;" src="../assets/icon/appointment.png" class="icon_ani"></ion-img>
+        </ion-col>  
+      </ion-row>
+      <br>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list>
+            <div class="margin_top15">
+
+              <ion-label>{{appointmentDate}}</ion-label>
+             
+              <ion-button fill="clear" (click)="openCalendar()">
+                <ion-icon slot="icon-only" name="calendar-outline" color="primary" size="large"></ion-icon>
+              </ion-button>
+      
+              <ion-datetime-button datetime="datetime" id="fake-click"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true" [isOpen]="showCalendar" (didDismiss)="cancelCalendar()">
+                <ng-template>
+                  <ion-datetime class="input_txt" displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [cancelText]="cancelText" [doneText]="doneText"  formControlName="appointmentDate" [showDefaultButtons]="true" presentation="date" [firstDayOfWeek]="1" id="datetime" (ionChange)="getTimeslots($event)" ></ion-datetime>
+                </ng-template>
+              </ion-modal>
+    
+
+            </div>
+            <div *ngIf="!bIsCalenderOpened">
+
+              <div class="margin_top15">
+                <ion-label>{{ dtSelectedDisplay }}</ion-label>
+              </div>
+  
+  
+             
+                <div *ngIf="timeSlotAvailable">
+  
+                <div class="margin_top15">
+                  <ion-label>{{timeslot}}</ion-label>
+                  <ion-select class="input_txt ion-padding" interface="action-sheet" name="timeslot" formControlName ="timeslot" [placeholder]="timeslotPH" [cancelText]="Dismiss" >
+                    <ion-select-option value="{{item.TimeslotString}}" *ngFor="let item of timeslots"> {{item.TimeslotString}}</ion-select-option> 
+                  </ion-select>
+                </div>
+                <div class="margin_top15">
+                  <ion-label>{{plateCode}}</ion-label>
+                  <ion-select class="input_txt ion-padding" interface="action-sheet" name="platecode" formControlName ="platecode" [placeholder]="plateCodePH" [cancelText]="Dismiss" >
+                    <ion-select-option value="{{item.Platecodestring}}" *ngFor="let item of platecodes"> {{item.Platecodestring}}</ion-select-option> 
+                  </ion-select>
+                </div>
+                <div class="margin_top15">
+                  <ion-label>{{plateNo}}</ion-label>
+                  <ion-input  class="input_txt ion-padding" [placeholder]="plateNoPH" formControlName="plateno"></ion-input>
+                </div>  
+                <div class="margin_top15">
+                  <ion-label>{{serviceAdvisor}}</ion-label>
+                  <ion-select class="input_txt ion-padding" interface="action-sheet" name="serviceAdvisorId" formControlName ="serviceAdvisorId" [placeholder]="serviceAdvisorPH" [cancelText]="Dismiss" >
+                    
+                        <ion-select-option *ngFor="let itm of serviceAdvisors" [value]=itm.ID> {{itm.Name}}</ion-select-option> 
+                    
+                  </ion-select>
+                </div>  
+                <!--<div class="margin_top15">
+                  <ion-label>{{AppointmentType}}</ion-label>
+                  <ion-select class="input_txt ion-padding" interface="action-sheet" name="appointmentTypeId" formControlName ="appointmentTypeId" [placeholder]="appontmentTypePH" [cancelText]="Dismiss" >
+                    <ion-select-option value="{{item.ID}}" *ngFor="let item of appointmentTypes"> {{item.Name}}</ion-select-option> 
+                  </ion-select>
+                </div>-->
+                <br>
+               
+                </div>
+              
+                <div *ngIf="timeSlotAvailable===false && firstTimeLoad===false">
+                <br>
+                <br>
+                <ion-label style="color:red;">{{timeslotNotAvailableMsg}}</ion-label>
+                </div>
+
+
+            </div>
+           
+             
+            
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    
+       <div *ngIf="!bIsCalenderOpened">
+        
+        <ion-row *ngIf="timeSlotAvailable">
+          <ion-col size-sm="6" offset-sm="3">          
+            <ion-button
+              type="submit"
+              color="danger"
+              expand="block"             
+              (click)="onCreateAppointment()">
+              {{goText}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+
+
+      </div>
+
+      
+      
+      
+    </ion-grid>
+  </form>
+ 
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>

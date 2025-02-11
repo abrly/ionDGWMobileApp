@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="danger" >
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/auth" ></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{heading1}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding main_background">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+          <ion-img style="width: 80px; display: block; margin: auto;" src="../assets/icon/reset_pass.png" class="icon_ani"></ion-img>
+        </ion-col>  
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-list class="list-ios">
+            <div class="container_">
+              <ul class="progressbar">
+                  <li class="current">{{step1}}</li>
+                  <li>{{step2}}</li>
+              </ul>
+          </div>
+            <br>
+            <br>
+            <div>
+             <ion-label position="floating">{{mobileNumber}}</ion-label>
+            </div>
+            <br>
+            <ion-row style="column-gap: 5px;">
+             <ion-col size="3" class="padding_o">
+                 <ion-select class="input_txt" interface="action-sheet" name="mobilePrefix" formControlName="mobilePrefix" [placeholder]="selectMobilePrefixPlaceholder" [cancelText]="cancelText">
+                     <ion-select-option value="{{item.MobilePrefix}}" *ngFor="let item of loadedMobilePrefixes">{{item.MobilePrefix}}</ion-select-option>
+                 </ion-select>
+             </ion-col>
+             <ion-col class="padding_o" style="display: flex; column-gap: 5px;">
+                 <ion-input class="input_txt ion-padding-start" type="text" formControlName="mobileNumber" required maxlength="7" [placeholder]="mobileNumberPlaceholder" minlength="7"></ion-input>
+             </ion-col>
+         </ion-row>
+         
+         <!-- <div class="margin_top15">              
+              <ion-label>{{selectMobilePrefix}}</ion-label>
+              <ion-select class="input_txt ion-padding" interface="action-sheet" name="mobilePrefix" formControlName ="mobilePrefix" [placeholder]="selectMobilePrefixPlaceholder" [cancelText]="cancelText" >
+                  <ion-select-option value="{{item.MobilePrefix}}" *ngFor="let item of loadedMobilePrefixes">{{item.MobilePrefix}}</ion-select-option> 
+              </ion-select>
+            </div>
+            
+            <div class="margin_top15">
+              <ion-label position="floating">{{mobileNumber}}</ion-label> 
+              <ion-input class="input_txt ion-padding"
+                type="tel"
+                formControlName="mobileNumber"
+                required
+                maxlength="7" [placeholder]="mobileNumberPlaceholder"
+                minlength="7"
+                ></ion-input>
+              </div>
+            <br> -->
+            <span *ngIf="form.controls['mobileNumber']?.errors?.RegNotExists" class="msg_red">
+                  {{message}}
+            </span>
+            <br>
+            <span *ngIf="isAccountHelperProcessFailed" class="msg_red">
+
+                {{accountHelperProcessFailReason}}
+
+            </span>
+             
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+      <ion-col>
+          <ion-button             
+            color="danger"
+            expand="block"
+             (click)="onInitiateForgotPassword()"
+             [disabled]="!form.valid"> 
+             {{submit}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>
+

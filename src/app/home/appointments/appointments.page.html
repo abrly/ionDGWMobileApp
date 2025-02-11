@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="danger">    
+    <ion-buttons slot="start" *ngIf="!isLoading">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{heading}}</ion-title>
+    <ion-buttons slot="end" *ngIf="this.loadedUserDept?.length > 0">
+      <ion-button (click)="onNewAppointment()">
+        <ion-icon name="add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+   </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding main_background">
+  <ion-row>
+    <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+      <ion-img style="width: 80px; display: block; margin: auto;" src="../assets/icon/appointment.png" class="icon_ani"></ion-img>
+    </ion-col>  
+  </ion-row>
+  <br>
+  <ion-segment [(ngModel)]="calendar.mode">
+    <ion-segment-button value="month">
+      <ion-label>{{cpMonth}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="week">
+      <ion-label>{{cpWeek}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="day">
+      <ion-label>{{cpDay}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <br>
+  <br>
+
+  <ion-row>
+    <!-- Move back one screen of the slides -->
+    <ion-col size="2">
+      <ion-button fill="clear" (click)="back()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+ 
+    <ion-col size="8" class="ion-text-center">
+      <h2>{{ viewTitle }}</h2>
+    </ion-col>
+ 
+    <!-- Move forward one screen of the slides -->
+    <ion-col size="2">
+      <ion-button fill="clear" (click)="next()">
+        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+ 
+     
+            <calendar [eventSource]="eventSource"
+            [calendarMode]= "calendar.mode"
+            [currentDate]="calendar.currentDate"
+            (onCurrentDateChanged)="onCurrentDateChanged($event)"
+            (onEventSelected)="onEventSelected($event)"
+            (onTitleChanged)="onViewTitleChanged($event)"
+            (onTimeSelected)="onTimeSelected($event)"
+            [startHour]="calendar.startHour"
+            [endHour]="calendar.endHour"
+            [step]="calendar.step"
+            [locale]="calendar.locale">
+            </calendar> 
+           
+         
+        
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>
+

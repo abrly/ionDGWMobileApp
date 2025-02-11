@@ -1,0 +1,28 @@
+export class Appointment {
+    constructor(
+        public AppointmentID: number,
+        public AppointmentDateTime: Date,
+        public Timeslot: string,
+        public StartDateTime: Date,
+        public EndDateTime: Date,
+        public Title: string,
+        public Description: string,       
+        public CustomerName: string,
+        public MobileNo: string,
+        public EmailAddress: string,
+        public Address: string,
+        public VehicleID: string,
+        public PlateNo: string,
+        public PlateCode: string,
+        public Language: string,
+        public VehicleDetail: string,
+        public VehicleColor: string,
+        public CreatedOn: Date,
+        public UpdatedOn: Date,
+        public IsCancellable: boolean,
+        public ServiceAdvisorId: string,
+        public MeterReading: string ,
+        public AppointmentTypeId:string,
+        public AppointmentTypeIdAr:string,          
+        ) { }
+}

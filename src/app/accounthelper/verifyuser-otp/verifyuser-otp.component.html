@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>
+      {{heading1}}
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding main_background ion-text-center">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center icon_ani">
+        <ion-img style="width: 80px; display: block; margin: auto;" src="../assets/icon/otp_pass.png" class="icon_ani"></ion-img>
+     </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-list class="list-ios">
+          <div class="container_">
+            <ul class="progressbar">
+                <li class="finish_">{{step1}}</li>
+                <li class="current">{{step2}}</li>
+            </ul>
+        </div>
+        <div class="notice_box ion-padding">
+          <div> {{an}} <span style="color:#db2627; font-weight: bold;">{{OTP}}</span> {{isSent}} <span style="color:#db2627; font-weight: bold;"> {{ regUser.mobileno }}</span>
+            {{isSentDetails}} <span style="color:#db2627; font-weight: bold;">'15'</span> {{secs}}.            
+          </div>
+          <br>
+          <ion-input
+          class="input_txt ion-padding"
+          type="tel"
+          name="OTP"
+          required
+          maxlength="5"
+          #otpInfo
+          [placeholder]="otpPlaceholder"
+        ></ion-input>
+        </div>
+         <ion-button class="primary" (click)="onConfirm(otpInfo.value.toString())">{{confirm}}</ion-button>
+          <ion-button class="primary" (click)="onCancel()">{{cancel}}</ion-button>
+          <br>
+          <ion-text color="danger" ion-text-center>
+              <div class="otp_timer">
+              <h3> {{ timer }} </h3>
+               </div>
+          </ion-text>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span>
+      <ion-label style="font-size:smaller"> </ion-label> 
+    </span>      
+</div>
+</ion-footer>
+
+ 

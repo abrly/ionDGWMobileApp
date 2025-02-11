@@ -1,0 +1,256 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start" *ngIf="!isLoading">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{heading1}}</ion-title>    
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding main_background">
+  <ion-grid>
+<!--  <ion-row>
+    <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+        <ion-img *ngIf="status ==='active' && this.searchby ==='byJobCard'" style="width: 80px; display: block; margin: auto;" class="icon_ani" src="../assets/icon/filter_by_JC_no.png"></ion-img>
+        <ion-img *ngIf="status==='active' && this.searchby ==='byPlateNo'" style="width: 80px; display: block; margin: auto;" class="icon_ani" src="../assets/icon/filter_by_JC_PLATEno.png"></ion-img>
+        <ion-img *ngIf="status==='all' && this.searchby ==='bydate'" style="width: 80px; display: block; margin: auto;" class="icon_ani" src="../assets/icon/search_byDATE.png"></ion-img>
+        <ion-img *ngIf="status==='all' && this.searchby ==='byJobCard'" style="width: 80px; display: block; margin: auto;" class="icon_ani" src="../assets/icon/search_by_jbC.png"></ion-img>
+        <ion-img *ngIf="status==='all' && this.searchby ==='byPlateNo'" style="width: 80px; display: block; margin: auto;" class="icon_ani" src="../assets/icon/search_by_plate.png"></ion-img>
+    </ion-col>
+   </ion-row> -->
+
+   <ion-img style="width: 80px; display: block; margin: auto;" class="icon_ani" [src]="imageURL"></ion-img>
+
+    <ion-row *ngIf="this.status==='all'"> 
+      <ion-col size="12" size-sm="8" offset-sm="2">             
+        <ion-segment (ionChange)="searchsegmentChanged($event)" color="danger" value="bydate">
+          <ion-segment-button value="bydate" *ngIf="this.status==='all'">
+            <ion-label style="font-size: smaller;">{{ByDate}}</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="byJobCard">
+            <ion-label style="font-size: smaller;">{{ByJobCardNo}} </ion-label>
+          </ion-segment-button>         
+          <ion-segment-button value="byPlateNo">
+          <ion-label style="font-size: smaller;">{{ByPlateNo}}</ion-label>
+         </ion-segment-button> 
+       </ion-segment>
+      </ion-col>
+  </ion-row> 
+  <ion-row *ngIf="this.status==='active'"> 
+    <ion-col size="12" size-sm="8" offset-sm="2">             
+      <ion-segment (ionChange)="searchsegmentChanged($event)" color="danger" value="byJobCard">
+        <ion-segment-button value="byJobCard">
+          <ion-label style="font-size: smaller;">{{FilterByJobCardNo}} </ion-label>
+        </ion-segment-button>         
+        <ion-segment-button value="byPlateNo">
+        <ion-label style="font-size: smaller;">{{FilterByPlateNo}}</ion-label>
+       </ion-segment-button> 
+     </ion-segment>
+    </ion-col>
+</ion-row>
+</ion-grid>
+<ion-grid>                          
+    <ion-row *ngIf="this.searchby==='bydate'"> 
+      <ion-col size="12" size-sm="8" offset-sm="2">   
+        <ion-card class="search_" *ngIf=showFilter ion-padding>
+        <ion-card-content>
+          <div>
+            <div class='Frow'>
+              <div class='Fcolumn'>
+                <ion-label>{{FromDate}}</ion-label>
+              </div>
+              <div class='Fcolumn'>
+                <ion-label>{{ToDate}}</ion-label>
+              </div>
+            </div>
+
+            <div class='Frow'>
+              <div class='Fcolumn'>
+                <ion-item>  
+                  <ion-input
+                    value="{{ frmDate | date: 'dd.MM.yyyy' }}"
+                    id="date"
+                    class="ion-text-start"
+                  ></ion-input>
+                  <ion-popover trigger="date" size="auto">
+                    <ng-template>
+                      <ion-datetime
+                        presentation="date"
+                        [(ngModel)]="frmDate"
+                        locale="en-GB"
+                        pickerFormat="DD-MM-YYYY" [cancelText]="cancelText" [doneText]="doneText"
+                        [showDefaultButtons]="true"
+                      ></ion-datetime>
+                    </ng-template>
+                  </ion-popover>                 
+                </ion-item>
+              </div>
+              <div class='Fcolumn'>
+                <ion-item>    
+                
+                  <ion-input
+                    value="{{ toDate | date: 'dd.MM.yyyy' }}"
+                    id="todate"
+                    class="ion-text-start"
+                  ></ion-input>
+                  <ion-popover trigger="todate" size="auto">
+                    <ng-template>
+                      <ion-datetime
+                        presentation="date"
+                        [(ngModel)]="toDate"
+                        locale="en-GB"
+                        pickerFormat="DD-MM-YYYY" [cancelText]="cancelText" [doneText]="doneText"
+                        [showDefaultButtons]="true"
+                      ></ion-datetime>
+                    </ng-template>
+                  </ion-popover>                 
+                </ion-item>
+              </div>
+            </div>
+           
+           </div>
+          <div>                          
+          <!--  <div class='Frow'>
+              <div class='Fcolumn'>
+
+                      <ion-label>{{FromDate}}</ion-label>                 
+                 
+                      <ion-datetime class="input_txt" displayFormat="DD.MM.YYYY"                 
+                      [(ngModel)]="frmDate" pickerFormat="DD-MM-YYYY" [cancelText]="cancelText" [doneText]="doneText">
+                      </ion-datetime>
+                    
+                  
+              </div>
+              <div class='Fcolumn'>
+                  <ion-label>{{ToDate}}</ion-label> 
+                  <ion-datetime class="input_txt" displayFormat="DD.MM.YYYY"  
+                  [(ngModel)]="toDate" pickerFormat="DD-MM-YYYY" [cancelText]="cancelText" [doneText]="doneText">
+                  </ion-datetime>
+              </div>
+          </div> -->
+            <ion-label>{{SelectStatus}}</ion-label>
+            <ion-select [(ngModel)]="jobcardStatus" class="input_txt" interface="alert" [placeholder]="SelectStatusPlaceholder" value="Select" [cancelText]="Dismiss" [okText]="Ok">
+              <ion-select-option value="ALL" >{{ALL}}</ion-select-option>
+              <ion-select-option value="OPEN">{{Pending}}</ion-select-option>
+              <ion-select-option value="WORK FINISHED">{{Completed}}</ion-select-option>
+              <ion-select-option value="CLOSED">{{Closed}}</ion-select-option>
+            </ion-select>
+            <ion-button
+            type="button"
+            color="danger"
+            expand="block"
+            (click)="onSearchJobCards(false,$event)">
+            {{Search}}
+          </ion-button>
+            </div>
+           </ion-card-content>
+      </ion-card>
+      </ion-col>
+     </ion-row>
+     <ion-row *ngIf="this.searchby==='byJobCard'">
+      <ion-col size="12" size-sm="8" offset-sm="2">       
+        <ion-card class="card_carsearch">            
+          <ion-card-content class="fix_card_content_extn">
+              <ion-grid class="ion-text-center">
+                  <ion-row>                     
+                      <ion-col size="12" size-sm="8" class="ion-text-center">    
+                        <ion-item color="white">
+                          <ion-label position="floating" style="font-size:smaller">{{JobCardNumber}}</ion-label>
+                          <ion-input class="input_txt" type="text" class="ion-text-center" [(ngModel)]="jobcardnoSearchText" [placeholder]="Filterworkorders" ></ion-input>
+                        </ion-item>
+                      </ion-col>                           
+                  </ion-row>
+                  <ion-row>
+                      <ion-col size="12" size-sm="8" class="ion-text-center">
+                        <ion-button
+                        style="height: 35px;"
+                        type="button"
+                        color="danger"                    
+                        (click)="onSearchJobCardsByID(jobcardnoSearchText)"     
+                        [disabled]="!jobcardnoSearchText">                   
+                        {{Search}}
+                      </ion-button>
+                      </ion-col>
+                  </ion-row>                                      
+              </ion-grid> 
+          </ion-card-content>                   
+      </ion-card>
+      </ion-col>    
+      </ion-row>
+      <ion-row *ngIf="this.searchby==='byPlateNo'">
+        <ion-col size="12" size-sm="8" offset-sm="2">       
+          <ion-card class="card_carsearch">            
+             <ion-card-content class="fix_card_content_extn">
+              <form [formGroup]="form">
+                 <ion-grid class="ion-text-center">
+                     <ion-row>
+                         <ion-col size="5" class="ion-text-center">   
+                             <ion-select class="input_txt" interface="alert" name="platecode" formControlName ="platecode" [placeholder]="plateCodePH" [cancelText]="Dismiss" [okText]="Ok" >
+                                 <ion-select-option value="{{item.Platecodestring}}" *ngFor="let item of platecodes"> {{item.Platecodestring}}</ion-select-option> 
+                               </ion-select>  
+                         </ion-col>
+                         <ion-col size="7" class="ion-text-center">
+                              <ion-input class="input_txt" type="text" [placeholder]="plateNo" formControlName="plateno" ></ion-input>  
+                         </ion-col>                           
+                     </ion-row>
+                     <ion-row>
+                         <ion-col size="12" size-sm="8" class="ion-text-center">
+                             <ion-button
+                             style="height: 35px;"
+                             type="submit"
+                             color="danger"   
+                             [disabled]="!form.valid"               
+                             (click)="onSearchVehicleByPlateNo()">                            
+                             {{Search}}
+                           </ion-button>
+                         </ion-col>
+                     </ion-row>                                      
+                 </ion-grid>   
+              </form> 
+             </ion-card-content>                   
+         </ion-card>
+        </ion-col>    
+      </ion-row>
+     <ion-row>
+        <ion-col size="12" size-sm="8" offset-sm="2" class="ion-text-center">
+            <ion-list>
+                 <div *ngIf=!recordsFound>
+                     {{Norecordsfound}}
+                 </div>                 
+                 <jobcarditem *ngFor="let j of jobcards" 
+                 [routerLink]="['/','home','jobcards',this.loadedUserToken,j.WorkOrderID,j.EquipmentNo]"              
+                 [equipmentDesc]="j.EquipmentDescription" [equipmentYear]="j.EquipmentYear" [workOrderID]="j.WorkOrderID" 
+                 [WorkOrderStatus] = "j.WorkOrderStatus" [WorkOrderStatusID] = "j.WorkOrderStatusID" [EQLicense]="j.EQLicense" [RepairReason]="j.RepairReason" [RepairReasonAr]="j.RepairReasonAr" >
+                 </jobcarditem>
+                 </ion-list>
+
+                 <ion-chip slot="end" style="color:white;" color="secondary">
+      
+                  <ion-icon name="list-outline"></ion-icon>     
+                
+                <ion-label>{{this.loadedRecsLength}} of {{this.recsCount}}</ion-label>
+      
+              </ion-chip>
+            <ion-infinite-scroll *ngIf="this.searchby ==='bydate'" (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>   
+            <ion-infinite-scroll *ngIf="this.status ==='active' && this.activelistrefinedbySearch !='true'" (ionInfinite)="doInfinite($event)">
+              <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+              </ion-infinite-scroll-content>
+          </ion-infinite-scroll>  
+        </ion-col>
+      </ion-row>   
+    </ion-grid>
+</ion-content>
+<ion-footer class="myjcfooter">
+  <div class = "bar bar-footer bar-assertive"> 
+    <span class="myPagefooter" *ngIf="this.searchby ==='bydate' && recordsFound">
+      <ion-label style="font-size:smaller"> {{this.loadedRecsLength}} / {{this.recsCount}} </ion-label> 
+    </span>   
+    <span class="myPagefooter" *ngIf="this.status ==='active' && this.activelistrefinedbySearch !='true' && recordsFound">
+      <ion-label style="font-size:smaller"> {{this.loadedRecsLength}} / {{this.recsCount}} </ion-label> 
+    </span>   
+</div>
+</ion-footer>
+ 
+

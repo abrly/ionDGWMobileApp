@@ -1,0 +1,79 @@
+<ion-app>
+  <div #splsh class="splash_c" [hidden]="!routerHidden">
+    <div id="logo0" >
+    <svg #logo1  class="anim_" data-llp-composed="true" xmlns="http://www.w3.org/2000/svg" version="1.0" width="200px" height="200px" viewBox="-70 0 700.000000 500.000000" preserveAspectRatio="xMidYMid meet">
+    <g transform="translate(0.000000,500.000000) scale(0.100,-0.100)" stroke-width="20" stroke="none" fill="none" fill-rule="evenodd">
+    <path stroke="rgb(255, 255, 255)" fill="" d="M3595 4920 c-357 -24 -727 -67 -955 -111 -295 -56 -751 -170 -802 -199 -10 -6 -23 -10 -30 -10 -6 0 -77 -24 -157 -54 -562 -209 -964 -468 -1187 -765 -63 -84 -136 -218 -150 -273 l-6 -28 659 0 660 0 17 63 c24 87 105 249 167 332 309 411 923 736 1724 909 316 68 710 112 1055 117 l125 2 -80 8 c-127 12 -897 18 -1040 9z" class="svg-elem-1"></path>
+    <path stroke="rgb(255, 255, 255)" fill="" d="M2440 3457 c3 -2 42 -14 87 -26 92 -24 252 -89 328 -135 129 -77 270 -213 353 -341 29 -45 90 -184 108 -245 28 -97 26 -316 -4 -425 -30 -106 -98 -243 -165 -330 -142 -185 -391 -335 -662 -400 l-50 -12 115 -7 c145 -9 1215 11 1292 24 82 14 230 65 319 110 260 128 448 341 529 595 31 99 39 292 16 396 -23 98 -39 146 -77 221 -69 137 -213 291 -359 386 -122 79 -311 151 -450 172 -75 11 -1390 28 -1380 17z" class="svg-elem-2"></path>
+    <path stroke="rgb(255, 255, 255)" fill="" d="M314 1483 c14 -56 87 -190 150 -274 223 -297 625 -556 1187 -765 80 -30 151 -54 157 -54 7 0 20 -4 30 -10 29 -17 358 -105 532 -143 436 -95 758 -138 1270 -168 197 -12 825 -5 995 10 80 8 79 8 -45 10 -962 14 -1866 271 -2440 694 -110 81 -263 231 -339 332 -62 83 -143 245 -167 333 l-17 62 -660 0 -659 0 6 -27z" class="svg-elem-3"></path>
+    </g>
+    </svg>
+    </div>
+    <!--anim start -->
+    <div class="midground">
+      <div class="carI"></div>
+      <div class="carII"></div>
+
+      <div class="bg_animII"></div>
+
+      <div class="catmove">
+          <div class="cat"></div>
+      </div>
+      <div class="chooper"></div>
+  </div>
+
+  <!--anim end -->
+</div>
+
+  
+  
+  <ion-menu contentId="main" type="overlay" side="start">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>{{title}} </ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+         <ion-menu-toggle>
+            <ion-item color="danger" lines="none" (click)="onProfileUpdate()" button>
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ion-label>{{updateProfile}}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
+            <ion-item lines="none" (click)="presentLogoutConfirm()" button> 
+              <ion-icon name="exit" slot="start"></ion-icon>
+              <ion-label>{{logout}}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>       
+    </ion-content>
+    <ion-footer>
+      <ion-toolbar>
+
+        <!--
+          <div class="social">
+              <a href="https://www.facebook.com/DubaiGovWS/" target="_blank">
+                  <ion-img style="width: 30px;height: 30px; display: block; margin: auto;" src="../assets/icon/s_FB_B.png" class="icon_ani"></ion-img>
+              </a>
+              <a href="https://www.instagram.com/dubaigovws/" target="_blank">
+                  <ion-img style="width: 30px;height: 30px; display: block; margin: auto;" src="../assets/icon/s_insta_B.png" class="icon_ani"></ion-img>
+              </a>
+              <a href="https://twitter.com/DubaiGovWS" target="_blank">
+                  <ion-img style="width: 30px;height: 30px; display: block; margin: auto;" src="../assets/icon/s_tw_B.png" class="icon_ani"></ion-img>
+              </a>
+              <a href="https://www.linkedin.com/company/dubai-government-workshop/mycompany/" target="_blank">
+                  <ion-img style="width: 30px;height: 30px; display: block; margin: auto;" src="../assets/icon/s_Lin_B.png" class="icon_ani"></ion-img>
+              </a>
+              <a href="https://www.dgw.gov.ae/Pages/Home.aspx" target="_blank">
+                  <ion-img style="width: 30px;height: 30px; display: block; margin: auto;" src="../assets/icon/s_web.png" class="icon_ani"></ion-img>
+              </a>
+          </div>
+        -->
+          
+      </ion-toolbar>
+  </ion-footer>
+  </ion-menu>
+  <ion-router-outlet id="main" [hidden]="routerHidden" #IonRouterOutlet ></ion-router-outlet>
+</ion-app>

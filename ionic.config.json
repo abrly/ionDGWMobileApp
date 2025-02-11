@@ -1,0 +1,7 @@
+{
+  "name": "com.dgw.dgwmobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

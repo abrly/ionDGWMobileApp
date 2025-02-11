@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DGW</string>
+    <string name="title_activity_main">DGW</string>
+    <string name="package_name">com.dgw.dgwmobile</string>
+    <string name="custom_url_scheme">com.dgw.dgwmobile</string>
+</resources>
